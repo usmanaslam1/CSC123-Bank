@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.*;
+import java.io.*;
 
 import com.usman.csudh.util.UniqueCounter;
 
@@ -12,6 +14,7 @@ public class Account implements Serializable {
 	private String accountName;
 	private Customer accountHolder;
 	private ArrayList<Transaction> transactions;
+	private ArrayList<String> forexArray;
 	
 	private boolean open=true;
 	private int accountNumber;
@@ -65,6 +68,20 @@ public class Account implements Serializable {
 		}
 		
 		transactions.add(new Transaction(Transaction.DEBIT,amount));
+	}
+	
+	public void testFile() throws FileNotFoundException {
+		
+		File directory = new File("exchange-rate.csv");
+		Scanner readFile = new Scanner(directory);
+		String data;
+		
+		while(readFile.hasNext()) {
+			data = readFile.nextLine();
+			forexArray.add(data);
+		}
+		System.out.println(forexArray);
+		
 	}
 	
 	public void close() {
